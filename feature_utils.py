@@ -338,3 +338,13 @@ def compare_waveforms(
         fig.suptitle(col)
         plt.tight_layout()
         plt.show()
+
+def calculate_raw_waveform_rms(value):
+    if value is None or np.isscalar(value):
+        return np.nan
+
+    samples = np.asarray(value, dtype=float).ravel()
+    if samples.size == 0 or not np.isfinite(samples).all():
+        return np.nan
+
+    return float(np.sqrt(np.mean(np.square(samples))))
